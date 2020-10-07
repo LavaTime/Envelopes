@@ -12,7 +12,7 @@ class BaseStrategy:
         param:
             self: the object
         return:
-            Envelope
+            None
         """
         self.perform_strategy()
 
@@ -26,7 +26,7 @@ class BaseStrategy:
         param:
             None
         return:
-            Envelope
+            None
         """
 
         for x in range(len(self._envelopeList)):
@@ -37,7 +37,7 @@ class BaseStrategy:
             answer = input("Y or N ?")
             if (answer == "Y" or answer == "y"):
                 print("Great")
-                return currentEnvelope
+                print("this is envelope number {0} and it contains: {1} $".format(x, currentEnvelope.money()))
             elif (answer == "N" or answer == "n"):
                 print("Ok, lets move on...")
 
