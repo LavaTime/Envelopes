@@ -11,7 +11,7 @@ class More_then_N_percent_group_strategy(BaseStrategy):
     def perform_strategy(self):
         """
         performs the game
-        returns: winning envelope
+        prints: winning envelope
         Param: The object
 
         """
@@ -25,13 +25,14 @@ class More_then_N_percent_group_strategy(BaseStrategy):
             if not envelope.used():
                 envelope.used(True)
                 if envelope.money >= max_money:
-                    return envelope
-        return self.envelopelist[99] #if there aren't any envelopes left
+                    print("the envelope has:", envelope.money(), "$")
+               
+        print("the envelope has:", self.evelopelist.money(), "$") #if there aren't any envelopes left
     def display(self):
         return "Player chooses a percentage of envelopes \n the game opens these envelopes and remembers the amount of money \n Then the game goes over the unopened envelopes and pick a envelope with more money then the maximum "
     def play(self):
         """
-        Returns: Envelope
+        Prints: Envelope
         """
         self.perform_strategy()
 
