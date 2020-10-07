@@ -1,5 +1,6 @@
 from envelope import Envelope
 from strategy import BaseStrategy, Automatic_BaseStrategy, N_max_strategy, More_then_N_percent_group_strategy
+from random import randint
 
 
 def cls(): print("\n" * 20)
