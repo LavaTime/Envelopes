@@ -25,7 +25,7 @@ class Automatic_BaseStrategy:
         return:
             Envelope
         """
-        number = randint(0, 10000)
+        number = randint(0, 111)
 
         myEnvelope = self._envelopeList[number]
 
