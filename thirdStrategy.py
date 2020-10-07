@@ -28,8 +28,7 @@ class More_then_N_percent_group_strategy(BaseStrategy):
                     return envelope
         return self.envelopelist[99] #if there aren't any envelopes left
     def display(self):
-        print("Player chooses a percentage of envelopes \n the game opens these envelopes and remembers the amount of money")
-        print("Then the game goes over the unopened envelopes and pick a envelope with more money then the maximum ")
+        return "Player chooses a percentage of envelopes \n the game opens these envelopes and remembers the amount of money \n Then the game goes over the unopened envelopes and pick a envelope with more money then the maximum "
     def play(self):
         """
         Returns: Envelope
