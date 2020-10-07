@@ -34,4 +34,3 @@ class Automatic_BaseStrategy:
     def display(self):
         return ("This strategy chooses a random envelope for you.")
 
-
