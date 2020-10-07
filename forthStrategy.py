@@ -23,6 +23,9 @@ class N_max_strategy:
             self._N = newN
         else:
             print('N can only be an integer')
+    
+    def display(self):
+        return "This is a strategy that opens N - 1 evelopes are are bigger than the first one"
 
     def play(self):
         """
@@ -65,9 +68,9 @@ class N_max_strategy:
         print(str(n_biggest))
 
 
-envs = []
-for i in range(10000000):
-    envs.append(Envelope())
-stra = N_max_strategy(envs)
-stra.N = 100
-stra.play()
+#envs = []
+#for i in range(10000000):
+#    envs.append(Envelope())
+#stra = N_max_strategy(envs)
+#stra.N = 100
+#stra.play()
