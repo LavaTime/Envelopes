@@ -11,7 +11,7 @@ class More_then_N_percent_group_strategy(BaseStrategy):
     def perform_strategy(self):
         """
         performs the game
-        Returns: winning envelope
+        returns: winning envelope
         Param: The object
 
         """
