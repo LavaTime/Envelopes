@@ -1,4 +1,3 @@
-from firstStrategy import BaseStrategy
 class More_then_N_percent_group_strategy(BaseStrategy):
     def __init__(self, envelopelist, percent):
         """
@@ -8,6 +7,7 @@ class More_then_N_percent_group_strategy(BaseStrategy):
         """
         self.envelopelist = envelopelist
         self.percent = percent
+
     def perform_strategy(self):
         """
         performs the game
@@ -15,33 +15,29 @@ class More_then_N_percent_group_strategy(BaseStrategy):
         Param: The object
 
         """
-        max_money = 0
-
-        for i in range (0, abs(100*self.percent)-1): #goes over the selected number of envelopes and selects the higest prize
-            self.envelopelist[i].used(True)
-            if self.envelopelist[i].money() > max_money:
-                max_money = self.envelopelist
+        max_money = 0.0
+        booli = False
+        numofenvelope = int(100 * float(self.percent))
+        for i in range(0, abs(
+                numofenvelope) - 1):  # goes over the selected number of envelopes and selects the higest prize
+            self.envelopelist[i].used = True
+            if float(self.envelopelist[i].money) > float(max_money):
+                max_money = self.envelopelist[i].money
         for envelope in self.envelopelist:
-            if not envelope.used():
-                envelope.used(True)
+            if not envelope.used:
+                envelope.used = (True)
                 if envelope.money >= max_money:
-                    print("the envelope has:", envelope.money(), "$")
-               
-        print("the envelope has:", self.evelopelist.money(), "$") #if there aren't any envelopes left
-        
+                    booli = True
+                    print("the envelope has:", envelope.money, "$")
+                    break
+        if not booli:
+            print("the envelope has:", self.envelopelist[99].money, "$")  # if there aren't any envelopes left
+
     def display(self):
         return "Player chooses a percentage of envelopes \n the game opens these envelopes and remembers the amount of money \n Then the game goes over the unopened envelopes and pick a envelope with more money then the maximum "
-    
+
     def play(self):
         """
         Prints: Envelope
         """
         self.perform_strategy()
-
-
-
-
-
-
-
-

@@ -124,72 +124,50 @@ class More_then_N_percent_group_strategy(BaseStrategy):
 
 # Forth Strategy
 
-class N_max_strategy:
-    """
-    can run the forth strategy on a set of envelops
-    Attributes:
-        envelops (list): list of envelops to run the strategy one
-        N (int): holds the N for the strategy
-    """
 
-    def __init__(self, envelops):
-        self.envelops = envelops
-        self._N = None
+class More_then_N_percent_group_strategy(BaseStrategy):
+    def __init__(self, envelopelist, percent):
+        """
+        Args:
+            envelopelist:
+            percent:
+        """
+        self.envelopelist = envelopelist
+        self.percent = percent
 
-    @property
-    def N(self):
-        return self._N
+    def perform_strategy(self):
+        """
+        performs the game
+        prints: winning envelope
+        Param: The object
 
-    @N.setter
-    def N(self, newN):
-        if newN is int:
-            self._N = newN
-        else:
-            print('N can only be an integer')
-    
+        """
+        max_money = 0.0
+        booli = False
+        numofenvelope = int(100 * float(self.percent))
+        for i in range(0, abs(
+                numofenvelope) - 1):  # goes over the selected number of envelopes and selects the higest prize
+            self.envelopelist[i].used = True
+            if float(self.envelopelist[i].money) > float(max_money):
+                max_money = self.envelopelist[i].money
+        for envelope in self.envelopelist:
+            if not envelope.used:
+                envelope.used = (True)
+                if envelope.money >= max_money:
+                    booli = True
+                    print("the envelope has:", envelope.money, "$")
+                    break
+        if not booli:
+            print("the envelope has:", self.envelopelist[99].money, "$")  # if there aren't any envelopes left
+
     def display(self):
-        return "This is a strategy that opens N - 1 evelopes are are bigger than the first one"
+        return "Player chooses a percentage of envelopes \n the game opens these envelopes and remembers the amount of money \n Then the game goes over the unopened envelopes and pick a envelope with more money then the maximum "
 
     def play(self):
         """
-        performs the strategy using the N and the object
-
-        Args:
-            self: the object
-
-        Returns:
-            None
-
-        Raises:
-            None
-
-        Warnings:
-            self.N must have been set before calling
+        Prints: Envelope
         """
-        self.perform_strategy(self.N)
-
-    def perform_strategy(self, counter):
-        """
-        perform the forth strategy, that opens envelopes that are bigger with some count
-
-        Args:
-            counter (int): how many bigger envelops to open before stopping
-
-        Returns:
-            None
-
-        """
-        n_biggest = [self.envelops[0].money]
-        i = 0
-        while len(n_biggest) < counter:
-            if i == len(self.envelops):
-                print('Not enough numbers')
-                break
-            if self.envelops[i].money > n_biggest[-1]:
-                n_biggest.append(self.envelops[i].money)
-            i += 1
-        print(str(n_biggest))
-
+        self.perform_strategy()
 
 #envs = []
 #for i in range(10000000):
