@@ -35,9 +35,11 @@ class BaseStrategy:
             currentEnvelope.used(True)
             print("do you want to keep it (Y) or do you want to move on (N)??? \n\n")
             answer = input("Y or N ?")
-            if (answer == "Y" or answer == "y"):
+            if ((answer == "Y" or answer == "y") and currentEnvelope.used == False):
                 print("Great")
                 print("this is envelope number {0} and it contains: {1} $".format(x, currentEnvelope.money()))
+                currentEnvelope.used = True
+                break
             elif (answer == "N" or answer == "n"):
                 print("Ok, lets move on...")
 
