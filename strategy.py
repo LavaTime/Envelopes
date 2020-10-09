@@ -31,13 +31,13 @@ class BaseStrategy:
 
         for x in range(len(self._envelopeList)):
             currentEnvelope = self._envelopeList[x]
-            print("envelope number {0} contains: {1} $".format(x, currentEnvelope.money()))
-            currentEnvelope.used(True)
+            print("envelope number {0} contains: {1} $".format(x, currentEnvelope.money))
+            currentEnvelope.used = True
             print("do you want to keep it (Y) or do you want to move on (N)??? \n\n")
             answer = input("Y or N ?")
             if (answer == "Y" or answer == "y"):
                 print("Great")
-                print("this is envelope number {0} and it contains: {1} $".format(x, currentEnvelope.money()))
+                print("this is envelope number {0} and it contains: {1} $".format(x, currentEnvelope.money))
             elif (answer == "N" or answer == "n"):
                 print("Ok, lets move on...")
 
@@ -74,11 +74,14 @@ class Automatic_BaseStrategy:
         return:
             Envelope
         """
-        number = randint(0, 111)
+        number = -1
+        while self._envelopeList[number].used == True or number == -1:
+            number = randint(0, 101)
 
         myEnvelope = self._envelopeList[number]
+        self._envelopeList[number].used = True
 
-        print(myEnvelope)
+        print(myEnvelope.money)
 
     def display(self):
         return ("This strategy chooses a random envelope for you.")
@@ -150,7 +153,7 @@ class N_max_strategy:
 
     @N.setter
     def N(self, newN):
-        if newN is int:
+        if type(newN) is int:
             self._N = newN
         else:
             print('N can only be an integer')
@@ -165,7 +168,7 @@ class N_max_strategy:
             self: the object
         Returns:
             None
-        Raises:
+        Raises: 
             None
         Warnings:
             self.N must have been set before calling
@@ -180,16 +183,20 @@ class N_max_strategy:
         Returns:
             None
         """
-        n_biggest = [self.envelops[0].money]
+        n_biggest = [self.envelops[0]]
         i = 0
         while len(n_biggest) < counter:
             if i == len(self.envelops):
                 print('Not enough numbers')
                 break
-            if self.envelops[i].money > n_biggest[-1]:
-                n_biggest.append(self.envelops[i].money)
+            if self.envelops[i].money > n_biggest[-1].money and self.envelops[i].used != True:
+                n_biggest.append(self.envelops[i])
             i += 1
-        print(str(n_biggest))
+        for i in range(len(self.envelops)):
+            if self.envelops[i] == n_biggest[-1]:
+                self.envelops[i].used = True
+                break
+        print(str(n_biggest[-1].money))
 
 
 #envs = []
