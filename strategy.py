@@ -122,6 +122,8 @@ class More_then_N_percent_group_strategy(BaseStrategy):
                     break
         if not booli:
             print("the envelope has:", self.envelopelist[99].money, "$")  # if there aren't any envelopes left
+        for i in range(0, 99):
+            self.envelopelist[i].used = False
 
     def display(self):
         return "Player chooses a percentage of envelopes \n the game opens these envelopes and remembers the amount of money \n Then the game goes over the unopened envelopes and pick a envelope with more money then the maximum "
