@@ -30,7 +30,7 @@ while n != 4:
             N = input(f'enter N max values: ')
             strategies[n].N = int(N)
         elif n == 3:
-            p = input(f'enter 0-1 number for group size(defualt=0.25)')
+            p = input(f'enter 0-1 number for group size')
             strategies[n].percent = p
         if n != 4:
             strategies[n].play()

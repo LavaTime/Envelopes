@@ -1,10 +1,11 @@
 from envelope import Envelope
+from random import randint
 
 
 class BaseStrategy:
 
-    def __init__(self, envelopeList):
-        self._envelopeList = envelopeList
+    def __init__(self, envelope_list):
+        self._envelopeList = envelope_list
 
     def play(self):
         """
@@ -15,7 +16,6 @@ class BaseStrategy:
             None
         """
         self.perform_strategy()
-
 
     def perform_strategy(self):
         """
@@ -30,30 +30,29 @@ class BaseStrategy:
         """
 
         for x in range(len(self._envelopeList)):
-            currentEnvelope = self._envelopeList[x]
-            print("envelope number {0} contains: {1} $".format(x, currentEnvelope.money))
-            currentEnvelope.used = True
+            current_envelope = self._envelopeList[x]
+            print("envelope number {0} contains: {1} $".format(x, current_envelope.money))
+            current_envelope.used = True
             print("do you want to keep it (Y) or do you want to move on (N)??? \n\n")
             answer = input("Y or N ?")
-            if (answer == "Y" or answer == "y"):
+            if answer == "Y" or answer == "y":
                 print("Great")
-                print("this is envelope number {0} and it contains: {1} $".format(x, currentEnvelope.money))
-            elif (answer == "N" or answer == "n"):
+                print("this is envelope number {0} and it contains: {1} $".format(x, current_envelope.money))
+            elif answer == "N" or answer == "n":
                 print("Ok, lets move on...")
 
-
     def display(self):
-        return ("This strategy shows you the inside of an envelope, and if you want to keep it you enter the letter 'Y', and if you don't enter 'N'.\n this will go on until you keep a envelope or ran out of new ones.")
+        return (
+            "This strategy shows you the inside of an envelope, and if you want to keep it you enter the letter 'Y', and if you don't enter 'N'.\n this will go on until you keep a envelope or ran out of new ones.")
+
 
 # SECOND STRATEGY
 
 
-from random import randint
-
 class Automatic_BaseStrategy:
 
-    def __init__(self, envelopeList):
-        self._envelopeList = envelopeList
+    def __init__(self, envelope_list):
+        self._envelopeList = envelope_list
 
     def play(self):
         """
@@ -75,16 +74,17 @@ class Automatic_BaseStrategy:
             Envelope
         """
         number = -1
-        while self._envelopeList[number].used == True or number == -1:
+        while self._envelopeList[number].used or number == -1:
             number = randint(0, 101)
 
-        myEnvelope = self._envelopeList[number]
+        my_envelope = self._envelopeList[number]
         self._envelopeList[number].used = True
 
-        print(myEnvelope.money)
+        print(my_envelope.money)
 
     def display(self):
-        return ("This strategy chooses a random envelope for you.")
+        return "This strategy chooses a random envelope for you."
+
 
 # Third strategy
 
@@ -115,7 +115,7 @@ class More_then_N_percent_group_strategy(BaseStrategy):
                 max_money = self.envelopelist[i].money
         for envelope in self.envelopelist:
             if not envelope.used:
-                envelope.used = (True)
+                envelope.used = True
                 if envelope.money >= max_money:
                     booli = True
                     print("the envelope has:", envelope.money, "$")
@@ -133,6 +133,7 @@ class More_then_N_percent_group_strategy(BaseStrategy):
         Prints: Envelope
         """
         self.perform_strategy()
+
 
 # Forth Strategy
 
@@ -153,13 +154,14 @@ class N_max_strategy:
     def N(self):
         return self._N
 
+    # noinspection PyPep8Naming
     @N.setter
-    def N(self, newN):
-        if type(newN) is int:
-            self._N = newN
+    def N(self, new_n):
+        if type(new_n) is int:
+            self._N = new_n
         else:
             print('N can only be an integer')
-    
+
     def display(self):
         return "This is a strategy that opens N - 1 evelopes are are bigger than the first one"
 
@@ -191,7 +193,7 @@ class N_max_strategy:
             if i == len(self.envelops):
                 print('Not enough numbers')
                 break
-            if self.envelops[i].money > n_biggest[-1].money and self.envelops[i].used != True:
+            if self.envelops[i].money > n_biggest[-1].money and not self.envelops[i].used:
                 n_biggest.append(self.envelops[i])
             i += 1
         for i in range(len(self.envelops)):
@@ -200,17 +202,15 @@ class N_max_strategy:
                 break
         print(str(n_biggest[-1].money))
 
-
-#envs = []
-#for i in range(10000000):
+# envs = []
+# for i in range(10000000):
 #    envs.append(Envelope())
-#stra = N_max_strategy(envs)
-#stra.N = 100
-#stra.play()
-#envs = []
-#for i in range(10000000):
+# stra = N_max_strategy(envs)
+# stra.N = 100
+# stra.play()
+# envs = []
+# for i in range(10000000):
 #    envs.append(Envelope())
-#stra = N_max_strategy(envs)
-#stra.N = 100
-#stra.play()
-
+# stra = N_max_strategy(envs)
+# stra.N = 100
+# stra.play()
