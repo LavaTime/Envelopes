@@ -31,19 +31,23 @@ class BaseStrategy:
 
         for x in range(len(self._envelopeList)):
             currentEnvelope = self._envelopeList[x]
-            print("envelope number {0} contains: {1} $".format(x, currentEnvelope.money))
-            print("do you want to keep it (Y) or do you want to move on (N)??? \n\n")
-            answer = input("Y or N ?")
-            if ((answer == "Y" or answer == "y") and currentEnvelope.used == False):
-                print("Great")
-                print("you chose envelope number {0} and it contains: {1} $".format(x, currentEnvelope.money))
-                currentEnvelope.used = True
-                break
-            elif (answer == "N" or answer == "n"):
-                currentEnvelope.used = True
-                print("Ok, lets move on...")
+            if(currentEnvelope.used == False):
+                print("envelope number {0} contains: {1} $".format(x, currentEnvelope.money))
+                print("do you want to keep it (Y) or do you want to move on (N)??? \n\n")
+                answer = input("Y or N ?")
+            
+                if (answer == "Y" or answer == "y"):
+                    print("Great")
+                    print("you chose envelope number {0} and it contains: {1} $".format(x, currentEnvelope.money))
+                    currentEnvelope.used = True
+                    break
+                elif (answer == "N" or answer == "n"):
+                    currentEnvelope.used = True
+                    print("Ok, lets move on...")
+            else:
+                print("envelope number {0} contains: {1} $".format(x, currentEnvelope.money))
+                print("But, this envelope was already opened so you can not claim it...\n\n")
 
 
     def display(self):
         return ("This strategy shows you the inside of an envelope, and if you want to keep it you enter the letter 'Y', and if you don't enter 'N'.\n this will go on until you keep a envelope or ran out of new ones.")
-
